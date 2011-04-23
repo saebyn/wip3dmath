@@ -1,0 +1,17 @@
+A point is two or three scalar values that represent a position.
+A movement is a direction quaternion value and a distance scalar value.
+A vector is a point and a movement value.
+
+- Quaternion [w, x, y, z]
+
+- Movement [w, x, y, z]
+
+- Point (abstract)
+|- Point2D [x, y]
+||- TexCoord (maybe not needed)
+|
+|- Point3D [x, y, z]
+||- Vector [Movement] (overrides '<<' & '>>' operators)
+|||- Volume (abstract)
+||||- Box [x/y/z length]
+||||- Cylinder [y height, radius]
