@@ -61,12 +61,12 @@ BezierSurface::getPoint(double a, double c) {
         Ix*3.0*a*b*b*c*c*c + Jx*9.0*a*c*c*b*b*d + Kx*9.0*a*b*b*c*d*d + Lx*3.0*a*b*b*d*d*d + \
         Mx*b*b*b*c*c*c     + Nx*3.0*b*b*b*c*c*d + Ox*3.0*b*b*b*c*d*d + Px*b*b*b*d*d*d;
 
-    x = Ay*a*a*a*c*c*c     + By*3.0*a*a*a*c*c*d + Cy*3.0*a*a*a*c*d*d + Dy*a*a*a*d*d*d + \
+    y = Ay*a*a*a*c*c*c     + By*3.0*a*a*a*c*c*d + Cy*3.0*a*a*a*c*d*d + Dy*a*a*a*d*d*d + \
         Ey*3.0*a*a*b*c*c*c + Fy*9.0*a*a*b*c*c*d + Gy*9.0*a*a*b*c*d*d + Hy*3.0*a*a*b*d*d*d + \
         Iy*3.0*a*b*b*c*c*c + Jy*9.0*a*c*c*b*b*d + Ky*9.0*a*b*b*c*d*d + Ly*3.0*a*b*b*d*d*d + \
         My*b*b*b*c*c*c     + Ny*3.0*b*b*b*c*c*d + Oy*3.0*b*b*b*c*d*d + Py*b*b*b*d*d*d;
 
-    x = Az*a*a*a*c*c*c     + Bz*3.0*a*a*a*c*c*d + Cz*3.0*a*a*a*c*d*d + Dz*a*a*a*d*d*d + \
+    z = Az*a*a*a*c*c*c     + Bz*3.0*a*a*a*c*c*d + Cz*3.0*a*a*a*c*d*d + Dz*a*a*a*d*d*d + \
         Ez*3.0*a*a*b*c*c*c + Fz*9.0*a*a*b*c*c*d + Gz*9.0*a*a*b*c*d*d + Hz*3.0*a*a*b*d*d*d + \
         Iz*3.0*a*b*b*c*c*c + Jz*9.0*a*c*c*b*b*d + Kz*9.0*a*b*b*c*d*d + Lz*3.0*a*b*b*d*d*d + \
         Mz*b*b*b*c*c*c     + Nz*3.0*b*b*b*c*c*d + Oz*3.0*b*b*b*c*d*d + Pz*b*b*b*d*d*d;
