@@ -117,7 +117,7 @@ Vector::operator+ (const Vector &vec) {
         vecres.v[2] /= vecres.v[0];
         vecres.v[3] /= vecres.v[0];
     }
-    return *this;
+    return vecres;
 }
 Vector 
 Vector::operator- (const Vector &vec) {
