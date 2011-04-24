@@ -90,4 +90,4 @@ UnitVector::set(double x, double y, double z) {
     check();
 }
 
-};
+}

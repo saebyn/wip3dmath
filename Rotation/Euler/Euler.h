@@ -20,13 +20,13 @@ class Euler : public Rotation {
     void set(double xrot, double yrot, double zrot);
     void get(double &xrot, double &yrot, double &zrot) const;
     // Quaternion rotation.
-    void set(const Quaternion& rotation);
     void get(Quaternion& rotation) const;
     /**/
     Euler get_x_axis() const;
     Euler get_y_axis() const;
     Euler get_z_axis() const;
     /* basic math operators */
+    Euler& operator+= (const Euler &);
     Euler operator+ (Euler &) const;
     Euler operator- (Euler &) const;
     /* equality operators */
@@ -38,11 +38,11 @@ class Euler : public Rotation {
     Matrix get_matrix() const;
     /* */
     Euler(double xrot, double yrot, double zrot);
-    Euler() {}
+    Euler() : xrot(0.0), yrot(0.0), zrot(0.0) {}
  protected:
     double xrot, yrot, zrot;
 };
 
-}; // namespace wip3dmath
+} // namespace wip3dmath
 
 #endif /* !defined(_WIP3DMATH_ROTATION_EULER_EULER_H_) */

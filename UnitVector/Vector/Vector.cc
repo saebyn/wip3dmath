@@ -199,4 +199,4 @@ Vector::Vector(const UnitVector &vec) : UnitVector(vec) {
     v[0] = 1;
 }
 
-};
+}

@@ -29,6 +29,6 @@ class Box : public Volume {
     double xhalfwidth, yhalfwidth, zhalfwidth;
 };
 
-};
+}
 
 #endif /* !defined(_WIP3DMATH_VOLUME_BOX_BOX_H_) */

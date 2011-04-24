@@ -361,4 +361,4 @@ Point::Point(void)
     set(0, 0, 0);
 }
 
-};
+}

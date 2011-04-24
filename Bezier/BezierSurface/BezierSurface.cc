@@ -34,7 +34,7 @@ BezierSurface::BezierSurface(Point ctlpoints[16]) {
 void 
 BezierSurface::getPoints(Point *points, int num_points) {
     int num_quads = num_points / 4;
-    double quadsidelen = sqrt( 1.0 / (double)num_quads );
+    double quadsidelen = sqrt( 1.0 / static_cast<double>(num_quads) );
     int nPoint = 0;
 
     for ( double a = 0.0; a <= 1.0; a += quadsidelen ) {
@@ -78,4 +78,4 @@ void
 BezierSurface::getNormals(Point *normals, int num_normals) {
 }
 
-};
+}

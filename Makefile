@@ -1,8 +1,8 @@
 CPP = g++
 LD = g++
 AR = ar
-CPPFLAGS = -fPIC -O3 -Wall -I.
-LDFLAGS = -shared -fPIC -O3
+CPPFLAGS = -fPIC -I. -Wall -Wold-style-cast -Woverloaded-virtual -pedantic
+LDFLAGS = -shared -fPIC
 INSTALL_DIR = ..
 
 objects = Rotation/Euler/Euler.o \

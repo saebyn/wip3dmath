@@ -36,6 +36,6 @@ template<class TObject> class QuadTree {
     std::list<TObject> objects;
 };
 
-}; // namespace wip3dmath
+} // namespace wip3dmath
 
 #endif /* !defined(_WIP3DMATH_TREE_QUADTREE_QUADTREE_H_) */

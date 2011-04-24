@@ -27,11 +27,6 @@ Euler::get(double &xrot, double &yrot, double &zrot) const {
 
 // Quaternion rotation.
 void 
-Euler::set(const Quaternion& rotation) {
-    rotation.get(xrot, yrot, zrot);
-}
-
-void 
 Euler::get(Quaternion& rotation) const {
     rotation.set(xrot, yrot, zrot);
 }
@@ -67,6 +62,15 @@ Euler::operator+ (Euler &other) const {
     a.zrot = zrot + other.zrot;
 
     return a;
+}
+
+Euler&
+Euler::operator+= (const Euler &other) {
+    xrot += other.xrot;
+    yrot += other.yrot;
+    zrot += other.zrot;
+
+    return *this;
 }
 
 Euler 
@@ -144,8 +148,8 @@ Euler::get_matrix() const {
     return result;
 }
 
-Euler::Euler(double xrot, double yrot, double zrot) {
+Euler::Euler(double pitch, double yaw, double roll) {
     set(xrot, yrot, zrot);
 }
 
-}; // namespace wip3dmath
+} // namespace wip3dmath

@@ -66,10 +66,12 @@ class Point {
     Point(const Point &);
     Point(double, double, double);
     Point(void);
+
+    virtual ~Point() {}
  protected:
     double x, y, z;
 };
 
-}; // namespace wip3dmath
+} // namespace wip3dmath
 
 #endif /* !defined(_WIP3DMATH_POINT_POINT_H_) */

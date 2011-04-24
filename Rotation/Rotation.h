@@ -17,9 +17,6 @@ namespace wip3dmath {
 class Rotation {
  public:
     /**/
-    //virtual Rotation get_x_axis() const = 0;
-    //virtual Rotation get_y_axis() const = 0;
-    //virtual Rotation get_z_axis() const = 0;
     /* basic math operators */
     //virtual Rotation operator+ (Rotation &value) const = 0;
     //virtual Rotation operator- (Rotation &value) const = 0;
@@ -30,9 +27,9 @@ class Rotation {
     //virtual const Rotation& rotate(double &x, double &y, double &z) const = 0;
     //virtual const Rotation& rotate(Point &point) const = 0;
     virtual Matrix get_matrix() const {Matrix m; return m;}
-    //virtual ~Rotation() {}
+    virtual ~Rotation() {}
 };
 
-}; // namespace wip3dmath
+} // namespace wip3dmath
 
 #endif /* !defined(_WIP3DMATH_ROTATION_ROTATION_H_) */

@@ -27,4 +27,13 @@ operator<< (std::ostream& s, Vector v) {
     return s << "Vector(" << v.v[0] << ", " << v.get() << ")";
 }
 
-};
+std::ostream&
+operator<< (std::ostream& s, Matrix m) {
+    return s << "Matrix([["
+             << m._11 << " " << m._12 << " " << m._13 << " " << m._14 << "]" << std::endl
+             << m._21 << " " << m._22 << " " << m._23 << " " << m._24 << "]" << std::endl
+             << m._31 << " " << m._32 << " " << m._33 << " " << m._34 << "]" << std::endl
+             << m._41 << " " << m._42 << " " << m._43 << " " << m._44 << "]" << std::endl << "])";
+}
+
+}

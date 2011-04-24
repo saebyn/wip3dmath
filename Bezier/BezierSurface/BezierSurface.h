@@ -47,6 +47,6 @@ class BezierSurface {
     double Px, Py, Pz;
 };
 
-}; // namespace wip3dmath
+} // namespace wip3dmath
 
 #endif /* !defined(_WIP3DMATH_BEZIER_BEZIERSURFACE_BEZIERSURFACE_H_) */

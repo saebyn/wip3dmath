@@ -74,4 +74,4 @@ Box::Box(double xvalue, double yvalue, double zvalue, double xhalfwidthvalue, do
     zhalfwidth = zhalfwidthvalue;
 }
 
-};
+}

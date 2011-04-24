@@ -20,8 +20,10 @@ class Volume : public Point {
     /* some usful methods */
     virtual bool inVolume(Point &) = 0;
     virtual double distance(Point &) = 0;
+
+    virtual ~Volume() {}
 };
 
-};
+}
 
 #endif /* !defined(_WIP3DMATH_POINT_POINT3D_VECTOR_VOLUME_VOLUME_H_) */

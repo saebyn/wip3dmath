@@ -30,6 +30,6 @@ class Cylinder : public Volume {
     double radius, height;
 };
 
-};
+}
 
 #endif /* !defined(_WIP3DMATH_POINT_POINT3D_VECTOR_VOLUME_CYLINDER_CYLINDER_H_) */

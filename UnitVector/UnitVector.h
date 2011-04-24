@@ -29,6 +29,8 @@ class UnitVector {
 
     Point get(void) const;
 
+    virtual ~UnitVector() {}
+
     /* I/O methods */
     friend std::ostream& operator<< (std::ostream&, UnitVector);
  protected:
@@ -39,6 +41,6 @@ class UnitVector {
     double v[4];
 };
 
-}; // namespace wip3dmath
+} // namespace wip3dmath
 
 #endif /* !defined(_WIP3DMATH_UNITVECTOR_UNITVECTOR_H_) */

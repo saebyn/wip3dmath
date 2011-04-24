@@ -173,4 +173,4 @@ Matrix::Matrix(void)
     identity();
 }
 
-};
+}

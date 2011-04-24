@@ -41,8 +41,11 @@ class Matrix {
     double _21, _22, _23, _24;
     double _31, _32, _33, _34;
     double _41, _42, _43, _44;
+
+    /* I/O methods */
+    friend std::ostream& operator<< (std::ostream&, Matrix);
 };
 
-};
+}
 
 #endif /* !defined(_WIP3DMATH_MATRIX_H_) */

@@ -46,6 +46,6 @@ class Vector : public UnitVector {
     friend std::ostream& operator<< (std::ostream&, Vector);
 };
 
-}; // namespace wip3dmath
+} // namespace wip3dmath
 
 #endif /* !defined(_WIP3DMATH_POINT_POINT3D_VECTOR_VECTOR_H_) */

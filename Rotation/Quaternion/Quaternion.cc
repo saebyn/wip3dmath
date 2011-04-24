@@ -12,32 +12,27 @@ namespace wip3dmath {
 
 // xrot, yrot, zrot: Euler angles in degrees.
 void 
-Quaternion::set(double xrot, double yrot, double zrot)
-{
+Quaternion::set(double pitch, double yaw, double roll) {
     // convert degrees to radians.
-    xrot *= PIOVER180;
-    yrot *= PIOVER180;
-    zrot *= PIOVER180;
+    pitch *= PIOVER180;
+    yaw *= PIOVER180;
+    roll *= PIOVER180;
 
-    // convert angles to unit length and find magnitude angle (theta).
-    double theta = sqrt( pow(xrot,2) + pow(yrot,2) + pow(zrot,2) );
-    if ( theta > 0 ) {
-        xrot /= theta;
-        yrot /= theta;
-        zrot /= theta;
-    }
+    // from http://www.j3d.org/matrix_faq/matrfaq_latest.html#Q60
+    const float fSinPitch(sin(pitch*0.5F));
+    const float fCosPitch(cos(pitch*0.5F));
+    const float fSinYaw(sin(yaw*0.5F));
+    const float fCosYaw(cos(yaw*0.5F));
+    const float fSinRoll(sin(roll*0.5F));
+    const float fCosRoll(cos(roll*0.5F));
+    const float fCosPitchCosYaw(fCosPitch*fCosYaw);
+    const float fSinPitchSinYaw(fSinPitch*fSinYaw);
+    x = fSinRoll * fCosPitchCosYaw     - fCosRoll * fSinPitchSinYaw;
+    y = fCosRoll * fSinPitch * fCosYaw + fSinRoll * fCosPitch * fSinYaw;
+    z = fCosRoll * fCosPitch * fSinYaw - fSinRoll * fSinPitch * fCosYaw;
+    w = fCosRoll * fCosPitchCosYaw     + fSinRoll * fSinPitchSinYaw;
 
-    double sin_thetahalf = sin(theta/2.0);
-    double cos_thetahalf = cos(theta/2.0);
-
-    set(cos_thetahalf,
-        xrot * sin_thetahalf,
-        yrot * sin_thetahalf,
-        zrot * sin_thetahalf);
-}
-
-void 
-Quaternion::get(double &xrot, double &yrot, double &zrot) const {
+    normalize();
 }
 
 // Quaternion rotation.
@@ -47,33 +42,12 @@ Quaternion::set(const Quaternion& rotation) {
     x = rotation.x;
     y = rotation.y;
     z = rotation.z;
+    normalize();
 }
 
 void 
 Quaternion::get(Quaternion& rotation) const {
     rotation.set(w, x, y, z);
-}
-
-//XXX
-Quaternion 
-Quaternion::get_x_axis() const
-{
-    Quaternion q;
-    return q;
-}
-
-Quaternion 
-Quaternion::get_y_axis() const
-{
-    Quaternion q;
-    return q;
-}
-
-Quaternion 
-Quaternion::get_z_axis() const
-{
-    Quaternion q;
-    return q;
 }
 
 //! set method.
@@ -91,6 +65,8 @@ Quaternion::set(double wvalue, double xvalue, double yvalue, double zvalue)
     x = xvalue;
     y = yvalue;
     z = zvalue;
+
+    normalize();
 }
 
 /* basic math operators */
@@ -132,11 +108,9 @@ Quaternion::rotate(const Point &value) const
     return point;
 }*/
 
-const Quaternion& 
+void
 Quaternion::rotate (Point& value) const {
     value = get_matrix() * value;
-
-    return *this;
 }
 
 Quaternion 
@@ -168,14 +142,22 @@ Quaternion::length() const
     return sqrt(pow(w, 2) + pow(x, 2) + pow(y, 2) + pow(z, 2));
 }
 
+void
+Quaternion::normalize() {
+    double magnitude = length();
+
+    if ( magnitude != 0 )
+      set(w/magnitude, x/magnitude, y/magnitude, z/magnitude);
+}
+
 Quaternion 
 Quaternion::normal() const 
 {
     Quaternion v;
-    double l = length();
+    double magnitude = length();
     
-    if ( l > 0 )
-        v = *this / length();
+    if ( magnitude != 0 )
+        v = *this / magnitude;
     else
         v = *this;
     
@@ -202,7 +184,7 @@ Quaternion::conjugate() const
     return v;
 }
 
-const Quaternion& 
+void
 Quaternion::rotate(double &x, double &y, double &z) const {
     Point p(x, y, z);
 
@@ -211,8 +193,6 @@ Quaternion::rotate(double &x, double &y, double &z) const {
     x = p.get_x();
     y = p.get_y();
     z = p.get_z();
-
-    return *this;
 }
 
 Matrix
@@ -245,14 +225,15 @@ Quaternion::get_matrix() const
 
 
 /* Constructors */
-Quaternion::Quaternion(double wvalue, double xvalue, double yvalue, double zvalue)
-{
-    set(wvalue, xvalue, yvalue, zvalue);
+Quaternion::Quaternion(double w0, double x0, double y0, double z0)  : w(w0), x(x0), y(y0), z(z0) {
+    normalize();
 }
 
-Quaternion::Quaternion(void)
-{
-    set(1, 0, 0, 0);
+Quaternion::Quaternion(double pitch, double yaw, double roll) : w(1), x(0), y(0), z(0)  {
+    set(pitch, yaw, roll);
 }
 
-};
+Quaternion::Quaternion(void) : w(1), x(0), y(0), z(0) {
+}
+
+}
