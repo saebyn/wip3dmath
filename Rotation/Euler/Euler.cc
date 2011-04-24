@@ -12,10 +12,19 @@ namespace wip3dmath {
 
 // Euler angles in degrees.
 void 
-Euler::set(double xrot, double yrot, double zrot) {
-    this->xrot = xrot * PIOVER180;
-    this->yrot = yrot * PIOVER180;
-    this->zrot = zrot * PIOVER180;
+Euler::set(double pitch, double yaw, double roll) {
+    xrot = pitch * PIOVER180;
+    yrot = yaw * PIOVER180;
+    zrot = roll * PIOVER180;
+
+    if ( fabs(xrot) < 0.00000001 )
+      xrot = 0.0;
+
+    if ( fabs(yrot) < 0.00000001 )
+      yrot = 0.0;
+
+    if ( fabs(zrot) < 0.00000001 )
+      zrot = 0.0;
 }
 
 void 
@@ -29,6 +38,15 @@ Euler::get(double &xrot, double &yrot, double &zrot) const {
 void 
 Euler::get(Quaternion& rotation) const {
     rotation.set(xrot, yrot, zrot);
+}
+
+Quaternion
+Euler::get() const {
+  Quaternion rotation;
+
+  get(rotation);
+
+  return rotation;
 }
 
 Euler 
@@ -149,7 +167,7 @@ Euler::get_matrix() const {
 }
 
 Euler::Euler(double pitch, double yaw, double roll) {
-    set(xrot, yrot, zrot);
+    set(pitch, yaw, roll);
 }
 
 } // namespace wip3dmath

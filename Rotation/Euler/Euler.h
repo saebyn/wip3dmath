@@ -21,6 +21,7 @@ class Euler : public Rotation {
     void get(double &xrot, double &yrot, double &zrot) const;
     // Quaternion rotation.
     void get(Quaternion& rotation) const;
+    Quaternion get() const;
     /**/
     Euler get_x_axis() const;
     Euler get_y_axis() const;
@@ -36,6 +37,8 @@ class Euler : public Rotation {
     const Euler& rotate(double &x, double &y, double &z) const;
     const Euler& rotate(Point &point) const;
     Matrix get_matrix() const;
+    /* I/O methods */
+    friend std::ostream& operator<< (std::ostream&, Euler);
     /* */
     Euler(double xrot, double yrot, double zrot);
     Euler() : xrot(0.0), yrot(0.0), zrot(0.0) {}

@@ -100,13 +100,29 @@ Quaternion::operator* (double value) const
     return v;
 }
 
-/*Point 
-Quaternion::rotate(const Point &value) const 
-{
-    Point point = get_matrix() * value;
+Quaternion
+Quaternion::operator* (Quaternion &other) const {
+    return Quaternion(w * other.w - vector().dot(other.vector()),
+                      other.vector() * w + vector() * other.w +
+                      vector() * other.vector());
+}
 
-    return point;
-}*/
+Vector
+Quaternion::vector() const {
+  return Vector(x, y, z);
+}
+
+/**
+ * Add together rotations into this one.
+ */
+Quaternion& 
+Quaternion::operator*= (const Rotation &rotation) {
+    Quaternion other = rotation.get();
+
+    *this = *this * other; 
+
+    return *this;
+}
 
 void
 Quaternion::rotate (Point& value) const {
@@ -146,8 +162,12 @@ void
 Quaternion::normalize() {
     double magnitude = length();
 
-    if ( magnitude != 0 )
-      set(w/magnitude, x/magnitude, y/magnitude, z/magnitude);
+    if ( magnitude != 0 ) {
+      w = w/magnitude;
+      x = x/magnitude;
+      y = y/magnitude;
+      z = z/magnitude;
+    }
 }
 
 Quaternion 
@@ -231,6 +251,10 @@ Quaternion::Quaternion(double w0, double x0, double y0, double z0)  : w(w0), x(x
 
 Quaternion::Quaternion(double pitch, double yaw, double roll) : w(1), x(0), y(0), z(0)  {
     set(pitch, yaw, roll);
+}
+
+Quaternion::Quaternion(double w0, Vector v) : w(w0), x(0), y(0), z(0) {
+  v.get().get(x, y, z);
 }
 
 Quaternion::Quaternion(void) : w(1), x(0), y(0), z(0) {

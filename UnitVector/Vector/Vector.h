@@ -42,6 +42,9 @@ class Vector : public UnitVector {
     Vector& operator*= (const double w);
     Vector operator* (const double w);
 
+    Vector operator* (const Vector& other) const;
+    double dot(const Vector& other) const;
+
     /* I/O methods */
     friend std::ostream& operator<< (std::ostream&, Vector);
 };

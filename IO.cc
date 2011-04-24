@@ -27,6 +27,16 @@ operator<< (std::ostream& s, Vector v) {
     return s << "Vector(" << v.v[0] << ", " << v.get() << ")";
 }
 
+std::ostream& 
+operator<< (std::ostream& s, Quaternion q) {
+    return s << "Quaternion(" << q.w << ", " << q.vector() << ")";
+}
+
+std::ostream& 
+operator<< (std::ostream& s, Euler r) {
+    return s << "Euler(pitch = " << r.xrot << ", yaw = " << r.yrot << ", roll = " << r.zrot << ")";
+}
+
 std::ostream&
 operator<< (std::ostream& s, Matrix m) {
     return s << "Matrix([["

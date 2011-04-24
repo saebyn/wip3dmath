@@ -160,6 +160,29 @@ Vector::operator* (const double w) {
     return res;
 }
 
+Vector 
+Vector::operator* (const Vector& other) const {
+  double rx, ry, rz;
+
+  MathUtils::crossProduct3(v[1] * v[0], v[2] * v[0], v[3] * v[0],
+                           other.v[1] * other.v[0],
+                           other.v[2] * other.v[0],
+                           other.v[3] * other.v[0],
+                           &rx, &ry, &rz);
+
+  Vector v(rx, ry, rz);
+
+  return v;
+}
+
+double 
+Vector::dot(const Vector& other) const {
+  return MathUtils::dotProduct3(v[1] * v[0], v[2] * v[0], v[3] * v[0],
+                                other.v[1] * other.v[0],
+                                other.v[2] * other.v[0],
+                                other.v[3] * other.v[0]);
+}
+
 
 Vector::Vector(const Point &p) {
     v[0] = sqrt(pow(p.get_x(),2) + pow(p.get_y(),2) + pow(p.get_z(),2));

@@ -11,6 +11,8 @@
 
 namespace wip3dmath {
 
+class Vector;
+
 //! Quaternion class.
 /*! Provides a datatype representing a quaternion.
  */
@@ -20,10 +22,14 @@ class Quaternion : public Rotation {
     void set(double pitch, double yaw, double roll);
     // Quaternion rotation.
     void set(const Quaternion& rotation);
+    Quaternion& operator=(const Quaternion &other) { set(other); return *this; }
     void get(Quaternion& rotation) const;
+
     /* basic math operators */
     Quaternion operator+ (Quaternion &) const;
+    Quaternion operator* (Quaternion &) const;
     Quaternion operator- (Quaternion &) const;
+    Quaternion& operator*= (const Rotation &);
     Quaternion inverse() const;
     /* equality operators */
     bool operator== (Quaternion &) const;
@@ -31,13 +37,18 @@ class Quaternion : public Rotation {
     /* rotation operators */
     void rotate(double &x, double &y, double &z) const;
     void rotate(Point &point) const;
-    //Point rotate(const Point &point) const;
     /* Matrix operations */
     Matrix get_matrix() const;
+    /* */
+    Quaternion get() const { return *this; }
     /* Constructors */
     Quaternion(double w0, double x0, double y0, double z0);
     Quaternion(double pitch, double yaw, double roll);
+    Quaternion(double w0, Vector v);
     Quaternion();
+
+    /* I/O methods */
+    friend std::ostream& operator<< (std::ostream&, Quaternion);
  protected:
     Quaternion operator* (double) const;
     Quaternion operator* (const Quaternion &) const;
@@ -47,6 +58,7 @@ class Quaternion : public Rotation {
     void normalize();
     Quaternion conjugate() const;
     void set(double, double, double, double);
+    Vector vector() const;
     double w, x, y, z;
 };
 
