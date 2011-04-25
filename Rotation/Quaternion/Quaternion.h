@@ -32,8 +32,8 @@ class Quaternion : public Rotation {
     Quaternion& operator*= (const Rotation &);
     Quaternion inverse() const;
     /* equality operators */
-    bool operator== (Quaternion &) const;
-    bool operator!= (Quaternion &) const;
+    bool operator== (const Quaternion &) const;
+    bool operator!= (const Quaternion &) const;
     /* rotation operators */
     void rotate(double &x, double &y, double &z) const;
     void rotate(Point &point) const;

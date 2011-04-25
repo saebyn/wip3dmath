@@ -3,32 +3,40 @@ LD = g++
 AR = ar
 CPPFLAGS = -fPIC -I. -Wall -Wold-style-cast -Woverloaded-virtual -pedantic
 LDFLAGS = -shared -fPIC
-INSTALL_DIR = ..
 
-objects = Rotation/Euler/Euler.o \
-          Rotation/Quaternion/Quaternion.o \
-          Point/Point.o \
-          UnitVector/UnitVector.o \
-          UnitVector/Vector/Vector.o \
-          Volume/Box/Box.o \
-          Volume/Cylinder/Cylinder.o \
-          Bezier/BezierSurface/BezierSurface.o \
-          QuadTree/QuadTree.o \
-          MathUtils.o \
-          Matrix.o \
-          IO.o
+SOURCES = Rotation/Euler/Euler.cc \
+          Rotation/Quaternion/Quaternion.cc \
+          Point/Point.cc \
+          UnitVector/UnitVector.cc \
+          UnitVector/Vector/Vector.cc \
+          Volume/Box/Box.cc \
+          Volume/Cylinder/Cylinder.cc \
+          Bezier/BezierSurface/BezierSurface.cc \
+          QuadTree/QuadTree.cc \
+          MathUtils.cc \
+          Matrix.cc \
+          IO.cc
 
-all: libwip3dmath.so
+OBJECTS := $(patsubst %.cc, %.o, $(SOURCES))
 
-libwip3dmath.so:    $(objects)
-	$(LD) -shared $(LDFLAGS) $(objects) -o libwip3dmath.so
+all: libwip3dmath.so test
 
-%.o:    %.cc
-	$(CPP) -c $(CPPFLAGS) $< -o $@
+libwip3dmath.so:    $(OBJECTS)
+	$(LD) -shared $(LDFLAGS) $(OBJECTS) -o libwip3dmath.so
 
-.PHONY: clean
+.SUFFIXES:
+.SUFFIXES:      .o .cc
+
+.cc.o : $(SOURCES)
+	$(CPP) -c $(CPPFLAGS) -o $@ $<
+
+.PHONY: clean test
 clean :
-	rm -f $(objects)
+	rm -f $(OBJECTS)
 	rm -f libwip3dmath.a
 	rm -f libwip3dmath.so
 	rm -f *~
+	(cd tests && make clean)
+
+test : libwip3dmath.so
+	(cd tests && make)

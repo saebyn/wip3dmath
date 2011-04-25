@@ -8,6 +8,8 @@
 
 #include "wip3dmath.h" 
 
+using namespace wip3dmath::MathUtils;
+
 namespace wip3dmath {
 
 // xrot, yrot, zrot: Euler angles in degrees.
@@ -140,15 +142,15 @@ Quaternion::operator/ (double value) const
 
 /* equality operators */
 bool 
-Quaternion::operator== (Quaternion &value) const 
+Quaternion::operator== (const Quaternion &value) const 
 {
-    return w == value.w && x == value.x && y == value.y && z == value.z;
+    return compare(w, value.w) && compare(x, value.x) && compare(y, value.y) && compare(z, value.z);
 }
 
 bool 
-Quaternion::operator!= (Quaternion &value) const 
+Quaternion::operator!= (const Quaternion &value) const 
 {
-    return w != value.w || x != value.x || y != value.y || z != value.z;
+    return !(compare(w, value.w) && compare(x, value.x) && compare(y, value.y) && compare(z, value.z));
 }
 
 /* Quaternion math methods */
@@ -219,6 +221,12 @@ Matrix
 Quaternion::get_matrix() const 
 {
     Matrix result;
+    Quaternion normalized = normal();
+    double w = normalized.w;
+    double x = normalized.x;
+    double y = normalized.y;
+    double z = normalized.z;
+
     double *matrix = new double[16];
     double twox = x+x;
     double twoy = y+y;

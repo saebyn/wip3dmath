@@ -8,6 +8,16 @@
 
 #include "wip3dmath.h"
 
+//! compare function.
+/*!
+ * \return True if the two values are within epsilon of each other, false
+ * otherwise.
+ */
+bool 
+MathUtils::compare(const double n, const double m) {
+  return fabs(n - m) < epsilon;
+}
+
 //! dotProduct3 function.
 /*!
  \param x1 First element of first 3x1 matrix.
